@@ -6,6 +6,7 @@ import Signup from './Components/Signup';
 import Home from './components/Home';
 import Header from './Components/Header';
 import PrivateRoute from './components/PrivateRoute';
+import './App.css';
 
 function App() {
   return (
