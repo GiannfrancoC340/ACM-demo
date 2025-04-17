@@ -14,10 +14,15 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">Map App</div>
-      {currentUser && (
+      {currentUser ? (
         <nav>
           <Link to="/home">Home</Link>
           <button onClick={handleLogout}>Logout</button>
+        </nav>
+      ) : (
+        <nav>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
         </nav>
       )}
     </header>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
   };
   
   return (
-    <div className="login-container">
+    <div className="auth-container">
       <h2>Login</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -46,8 +46,11 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className="btn-primary">Log In</button>
       </form>
+      <div className="auth-footer">
+        <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+      </div>
     </div>
   );
 }
