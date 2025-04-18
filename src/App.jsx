@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Signup from './Components/Signup'
 import Login from './Components/Login'
 import MapView from './Components/MapView'
-import ProtectedRoute from './routes/ProtectedRoute'
+import ProtectedRoute from './Routes/ProtectedRoute'
 
 function App() {
   return (
