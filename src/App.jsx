@@ -1,34 +1,26 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './Context/AuthContext';
-import Login from './components/Login';
-import Signup from './Components/Signup';
-import Home from './components/Home';
-import Header from './Components/Header';
-import PrivateRoute from './components/PrivateRoute';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Signup from './Components/Signup'
+import Login from './Components/Login'
+import MapView from './Components/MapView'
+import ProtectedRoute from './routes/ProtectedRoute'
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route 
-            path="/home" 
-            element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            } 
-          />
-          <Route path="/" element={<Navigate to="/login" />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+    <Router>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/map"
+          element={
+            <ProtectedRoute>
+              <MapView />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
