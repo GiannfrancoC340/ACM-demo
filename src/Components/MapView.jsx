@@ -23,13 +23,15 @@ export default function MapView() {
   }, [])
 
   return (
-    <MapContainer center={[39.8283, -98.5795]} zoom={4} style={{ height: '100vh', width: '100%' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {locations.map(loc => (
-        <Marker key={loc.id} position={[loc.lat, loc.lng]} icon={redIcon}>
-          <Popup>{loc.description}</Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div style={{ height: '100vh', width: '100%' }}>
+      <MapContainer center={[39.8283, -98.5795]} zoom={4} style={{ height: '100vh', width: '100%' }}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {locations.map(loc => (
+          <Marker key={loc.id} position={[loc.lat, loc.lng]} icon={redIcon}>
+            <Popup>{loc.description}</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   )
 }
