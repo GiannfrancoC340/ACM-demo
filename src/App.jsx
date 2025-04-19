@@ -9,8 +9,8 @@ import './App.css'
 function Home() {
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Map App Home</h1>
-      <p>Welcome to the Map Application!</p>
+      <h1>ACM Home</h1>
+      <p>Welcome to the Airplane Communication Mapping application!</p>
       <div style={{ marginTop: '20px' }}>
         <a href="/login" style={{ marginRight: '10px' }}>Login</a>
         <a href="/signup" style={{ marginRight: '10px' }}>Signup</a>

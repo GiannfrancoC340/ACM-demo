@@ -42,7 +42,12 @@ export default function MapView() {
   const bocaRatonAirport = {
     lat: 26.3785,
     lng: -80.1077,
-    description: "Boca Raton Airport (BCT)"
+    description: "Boca Raton Airport (BCT)",
+    flightCount: 2,
+    flights: [
+      { route: "RDU to BCT", time: "2:56 PM" },
+      { route: "BCT to MIA", time: "4:30 PM" }
+    ]
   };
 
   useEffect(() => {
@@ -81,16 +86,31 @@ export default function MapView() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
-        {/* Boca Raton Airport marker */}
+        {/* Boca Raton Airport marker with flight information */}
         <Marker 
           position={[bocaRatonAirport.lat, bocaRatonAirport.lng]} 
           icon={redIcon}
         >
           <Popup>
-            <div>
-              <h3>{bocaRatonAirport.description}</h3>
+            <div style={{ fontFamily: 'Arial, sans-serif', padding: '5px' }}>
+              <h3 style={{ marginTop: '0', color: '#e04141' }}>{bocaRatonAirport.description}</h3>
               <p>A public-use airport serving South Florida</p>
-              <p>Coordinates: {bocaRatonAirport.lat}, {bocaRatonAirport.lng}</p>
+              <p style={{ fontWeight: 'bold' }}>Number of flights leaving BCT: {bocaRatonAirport.flightCount}</p>
+              
+              <div style={{ marginTop: '10px' }}>
+                <h4 style={{ marginBottom: '5px', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>Today's Flights:</h4>
+                <ul style={{ paddingLeft: '20px', margin: '5px 0' }}>
+                  {bocaRatonAirport.flights.map((flight, index) => (
+                    <li key={index} style={{ marginBottom: '5px' }}>
+                      <strong>{flight.route}</strong> - {flight.time}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div style={{ fontSize: '0.8em', marginTop: '10px', color: '#666' }}>
+                Coordinates: {bocaRatonAirport.lat.toFixed(4)}, {bocaRatonAirport.lng.toFixed(4)}
+              </div>
             </div>
           </Popup>
         </Marker>
