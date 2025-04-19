@@ -103,9 +103,15 @@ nav {
   width: 100%;
 }
 
-body, html {
+body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+}
+
+.leaflet-container {
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
 }
