@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import L from 'leaflet'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import './MapView.css' // Import the CSS file
 
 // Fix for the default icon
 let DefaultIcon = L.icon({
@@ -93,41 +94,35 @@ export default function MapView() {
           icon={redIcon}
         >
           <Popup>
-            <div style={{ fontFamily: 'Arial, sans-serif', padding: '5px' }}>
-              <h3 style={{ marginTop: '0', color: '#e04141' }}>{bocaRatonAirport.description}</h3>
-              <p>A public-use airport serving South Florida</p>
-              <p style={{ fontWeight: 'bold' }}>Number of flights leaving BCT: {bocaRatonAirport.flightCount}</p>
+            <div className="airport-popup">
+              <h3 className="airport-title">{bocaRatonAirport.description}</h3>
+              <p className="airport-description">A public-use airport serving South Florida</p>
+              <p className="flight-count">Number of flights leaving BCT: {bocaRatonAirport.flightCount}</p>
               
-              <div style={{ marginTop: '10px' }}>
-                <h4 style={{ marginBottom: '5px', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>Today's Flights:</h4>
-                <ul style={{ paddingLeft: '20px', margin: '5px 0' }}>
+              <div className="flights-section">
+                <h4 className="flights-heading">Today's Flights:</h4>
+                <ul className="flights-list">
                   {bocaRatonAirport.flights.map((flight) => (
-                    <li key={flight.id} style={{ marginBottom: '5px' }}>
-                      <Link 
-                        to={`/flights/${flight.id}`} 
-                        style={{ 
-                          color: '#e04141', 
-                          textDecoration: 'none', 
-                          fontWeight: 'bold',
-                          display: 'block'
-                        }}
-                      >
-                        <strong>{flight.route}</strong> - {flight.time}
-                        <span style={{ 
-                          display: 'block', 
-                          fontSize: '0.8em', 
-                          color: '#666',
-                          marginTop: '2px'
-                        }}>
-                          Click for details →
-                        </span>
+                    <li key={flight.id} className="flight-item">
+                      <Link to={`/flights/${flight.id}`} className="flight-link">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <span className="flight-icon">✈️</span>
+                          <div className="flight-details">
+                            <span>
+                              <strong>{flight.route}</strong> - <span className="flight-time">{flight.time}</span>
+                            </span>
+                            <span className="flight-action-text">
+                              Click for details
+                            </span>
+                          </div>
+                        </div>
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
               
-              <div style={{ fontSize: '0.8em', marginTop: '10px', color: '#666' }}>
+              <div className="coordinates">
                 Coordinates: {bocaRatonAirport.lat.toFixed(4)}, {bocaRatonAirport.lng.toFixed(4)}
               </div>
             </div>
