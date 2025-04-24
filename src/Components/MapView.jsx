@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
+import { Link } from 'react-router-dom'
 import L from 'leaflet'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
@@ -38,15 +39,15 @@ export default function MapView() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   
-  // Boca Raton Airport coordinates
+  // Boca Raton Airport coordinates and flight data
   const bocaRatonAirport = {
     lat: 26.3785,
     lng: -80.1077,
     description: "Boca Raton Airport (BCT)",
     flightCount: 2,
     flights: [
-      { route: "RDU to BCT", time: "2:56 PM" },
-      { route: "BCT to MIA", time: "4:30 PM" }
+      { id: "flight-1", route: "RDU to BCT", time: "2:56 PM" },
+      { id: "flight-2", route: "BCT to MIA", time: "4:30 PM" }
     ]
   };
 
@@ -86,7 +87,7 @@ export default function MapView() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
-        {/* Boca Raton Airport marker with flight information */}
+        {/* Boca Raton Airport marker with clickable flight information */}
         <Marker 
           position={[bocaRatonAirport.lat, bocaRatonAirport.lng]} 
           icon={redIcon}
@@ -100,9 +101,27 @@ export default function MapView() {
               <div style={{ marginTop: '10px' }}>
                 <h4 style={{ marginBottom: '5px', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>Today's Flights:</h4>
                 <ul style={{ paddingLeft: '20px', margin: '5px 0' }}>
-                  {bocaRatonAirport.flights.map((flight, index) => (
-                    <li key={index} style={{ marginBottom: '5px' }}>
-                      <strong>{flight.route}</strong> - {flight.time}
+                  {bocaRatonAirport.flights.map((flight) => (
+                    <li key={flight.id} style={{ marginBottom: '5px' }}>
+                      <Link 
+                        to={`/flights/${flight.id}`} 
+                        style={{ 
+                          color: '#e04141', 
+                          textDecoration: 'none', 
+                          fontWeight: 'bold',
+                          display: 'block'
+                        }}
+                      >
+                        <strong>{flight.route}</strong> - {flight.time}
+                        <span style={{ 
+                          display: 'block', 
+                          fontSize: '0.8em', 
+                          color: '#666',
+                          marginTop: '2px'
+                        }}>
+                          Click for details →
+                        </span>
+                      </Link>
                     </li>
                   ))}
                 </ul>
