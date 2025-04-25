@@ -144,3 +144,25 @@
       width: 100%;
     }
   }
+
+  /* New styles for time information */
+.time-info {
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  border-left: 3px solid #e04141;
+}
+
+.time-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+.time-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e04141;
+}

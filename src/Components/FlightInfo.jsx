@@ -8,6 +8,8 @@ export default function FlightInfo() {
     'flight-1': {
       route: "RDU to BCT",
       time: "2:56 PM",
+      boardingTime: "2:26 PM", // 30 minutes before departure
+      arrivalTime: "5:11 PM", // departure + duration
       airline: "SkyWay Express",
       flightNumber: "SW1234",
       aircraft: "Cessna Citation CJ3",
@@ -32,6 +34,8 @@ export default function FlightInfo() {
     'flight-2': {
       route: "BCT to MIA",
       time: "4:30 PM",
+      boardingTime: "4:00 PM", // 30 minutes before departure
+      arrivalTime: "5:15 PM", // departure + duration
       airline: "Florida Connect",
       flightNumber: "FC567",
       aircraft: "Pilatus PC-12",
@@ -56,6 +60,8 @@ export default function FlightInfo() {
     'flight-3': {
       route: "BCT to ATL",
       time: "5:15 PM",
+      boardingTime: "4:45 PM", // 30 minutes before departure
+      arrivalTime: "7:10 PM", // departure + duration
       airline: "Southern Airways",
       flightNumber: "SA789",
       aircraft: "Embraer Phenom 300",
@@ -80,6 +86,8 @@ export default function FlightInfo() {
     'flight-4': {
       route: "BCT to LGA",
       time: "6:45 PM",
+      boardingTime: "6:15 PM", // 30 minutes before departure
+      arrivalTime: "9:30 PM", // departure + duration
       airline: "East Coast Express",
       flightNumber: "ECE456",
       aircraft: "Bombardier Challenger 350",
@@ -104,6 +112,8 @@ export default function FlightInfo() {
     'flight-5': {
       route: "MCO to BCT",
       time: "7:30 PM",
+      boardingTime: "7:00 PM", // 30 minutes before departure
+      arrivalTime: "8:20 PM", // departure + duration
       airline: "Florida Sky",
       flightNumber: "FS321",
       aircraft: "Beechcraft King Air 350",
@@ -182,6 +192,12 @@ export default function FlightInfo() {
           <div className="airport-code">{flight.departureAirport.code}</div>
           <div className="airport-name">{flight.departureAirport.name}</div>
           <div className="airport-location">{flight.departureAirport.city}, {flight.departureAirport.state}</div>
+          
+          <div className="time-info">
+            <div className="time-label">Boarding Time:</div>
+            <div className="time-value">{flight.boardingTime}</div>
+          </div>
+          
           <div className="gate-info">
             <span>Terminal: {flight.terminal}</span>
             <span>Gate: {flight.gate}</span>
@@ -193,6 +209,11 @@ export default function FlightInfo() {
           <div className="airport-code">{flight.arrivalAirport.code}</div>
           <div className="airport-name">{flight.arrivalAirport.name}</div>
           <div className="airport-location">{flight.arrivalAirport.city}, {flight.arrivalAirport.state}</div>
+          
+          <div className="time-info">
+            <div className="time-label">Estimated Arrival:</div>
+            <div className="time-value">{flight.arrivalTime}</div>
+          </div>
         </div>
       </div>
       
