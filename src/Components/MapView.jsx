@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import L from 'leaflet'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import './MapView.css' // Import the CSS file
+import './MapView.css'
 
 // Fix for the default icon
 let DefaultIcon = L.icon({
@@ -39,6 +39,7 @@ export default function MapView() {
   const [locations, setLocations] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [hoveredFlight, setHoveredFlight] = useState(null)
   
   // Boca Raton Airport coordinates and flight data
   const bocaRatonAirport = {
@@ -77,11 +78,11 @@ export default function MapView() {
   if (error) return <div>{error}</div>
 
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div className="map-page">
       <MapContainer 
         center={[bocaRatonAirport.lat, bocaRatonAirport.lng]} 
         zoom={13} 
-        style={{ height: '100%', width: '100%' }}
+        className="map-container"
       >
         <TileLayer 
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -95,24 +96,27 @@ export default function MapView() {
         >
           <Popup>
             <div className="airport-popup">
-              <h3 className="airport-title">{bocaRatonAirport.description}</h3>
-              <p className="airport-description">A public-use airport serving South Florida</p>
-              <p className="flight-count">Number of flights leaving BCT: {bocaRatonAirport.flightCount}</p>
+              <h3>{bocaRatonAirport.description}</h3>
+              <p>A public-use airport serving South Florida</p>
+              <p style={{ fontWeight: 'bold' }}>Number of flights leaving BCT: {bocaRatonAirport.flightCount}</p>
               
-              <div className="flights-section">
-                <h4 className="flights-heading">Today's Flights:</h4>
+              <div style={{ marginTop: '10px' }}>
+                <h4>Today's Flights:</h4>
                 <ul className="flights-list">
                   {bocaRatonAirport.flights.map((flight) => (
-                    <li key={flight.id} className="flight-item">
-                      <Link to={`/flights/${flight.id}`} className="flight-link">
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <li key={flight.id}>
+                      <Link 
+                        to={`/flights/${flight.id}`} 
+                        className={`flight-link ${hoveredFlight === flight.id ? 'hover' : ''}`}
+                        onMouseEnter={() => setHoveredFlight(flight.id)}
+                        onMouseLeave={() => setHoveredFlight(null)}
+                      >
+                        <div className="flight-item">
                           <span className="flight-icon">✈️</span>
-                          <div className="flight-details">
-                            <span>
-                              <strong>{flight.route}</strong> - <span className="flight-time">{flight.time}</span>
-                            </span>
-                            <span className="flight-action-text">
-                              Click for details
+                          <div>
+                            <span className="flight-route">{flight.route}</span> - {flight.time}
+                            <span className="flight-info-hint">
+                              {hoveredFlight === flight.id ? '→ View flight details' : 'Click for details'}
                             </span>
                           </div>
                         </div>
@@ -122,7 +126,7 @@ export default function MapView() {
                 </ul>
               </div>
               
-              <div className="coordinates">
+              <div className="coordinates-info">
                 Coordinates: {bocaRatonAirport.lat.toFixed(4)}, {bocaRatonAirport.lng.toFixed(4)}
               </div>
             </div>

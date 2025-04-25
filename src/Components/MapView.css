@@ -42,54 +42,19 @@
   z-index: 1000;
 }
 
-/* Airport popup styling */
-.airport-popup {
-  font-family: Arial, sans-serif;
-  padding: 5px;
-  min-width: 240px;
+/* Map container */
+.map-container {
+  height: 100vh;
+  width: 100%;
 }
 
-.airport-title {
-  margin-top: 0;
-  color: #e04141;
-}
-
-.airport-description {
-  margin-bottom: 10px;
-}
-
-.flight-count {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.flights-section {
-  margin-top: 10px;
-}
-
-.flights-heading {
-  margin-bottom: 5px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-}
-
-.flights-list {
-  padding-left: 0;
-  margin: 5px 0;
-  list-style: none;
-}
-
-.flight-item {
-  margin-bottom: 5px;
-}
-
-/* Flight link styling with hover effects */
+/* Flight link styles */
 .flight-link {
   color: #e04141;
   text-decoration: none;
   font-weight: bold;
   display: block;
-  padding: 4px 8px;
+  padding: 8px;
   border-radius: 4px;
   transition: all 0.3s ease;
   background-color: transparent;
@@ -102,33 +67,60 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.flight-icon {
-  margin-right: 5px;
-  font-size: 12px;
+/* Popup styles */
+.airport-popup {
+  font-family: Arial, sans-serif;
+  padding: 5px;
+  min-width: 220px;
 }
 
-.flight-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.flight-time {
-  font-weight: normal;
-}
-
-.flight-action-text {
-  display: block;
-  font-size: 10px;
-  color: #667;
-  margin-top: 2px;
-}
-
-.flight-link:hover .flight-action-text {
+.airport-popup h3 {
+  margin-top: 0;
   color: #e04141;
 }
 
-.coordinates {
+.airport-popup h4 {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.flights-list {
+  padding-left: 0;
+  margin: 5px 0;
+  list-style: none;
+}
+
+.flights-list li {
+  margin-bottom: 5px;
+}
+
+.flight-item {
+  display: flex;
+  align-items: center;
+}
+
+.flight-icon {
+  margin-right: 5px;
+}
+
+.flight-info-hint {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 2px;
+}
+
+.coordinates-info {
   font-size: 0.8em;
   margin-top: 10px;
-  color: #667;
+  color: #666;
+}
+
+/* Route text styling */
+.flight-route {
+  color: #e04141;
+  font-weight: bold;
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
 }
