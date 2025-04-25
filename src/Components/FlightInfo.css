@@ -33,6 +33,14 @@
     color: #4CAF50;
     font-weight: bold;
   }
+
+  .status.on-time {
+    color: #4CAF50;
+  }
+  
+  .status.delayed {
+    color: #FF9800;
+  }
   
   .flight-details {
     display: flex;

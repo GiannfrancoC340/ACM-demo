@@ -40,16 +40,20 @@ export default function MapView() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [hoveredFlight, setHoveredFlight] = useState(null)
+  const [showAllFlights, setShowAllFlights] = useState(false)
   
   // Boca Raton Airport coordinates and flight data
   const bocaRatonAirport = {
     lat: 26.3785,
     lng: -80.1077,
     description: "Boca Raton Airport (BCT)",
-    flightCount: 2,
+    flightCount: 5,
     flights: [
       { id: "flight-1", route: "RDU to BCT", time: "2:56 PM" },
-      { id: "flight-2", route: "BCT to MIA", time: "4:30 PM" }
+      { id: "flight-2", route: "BCT to MIA", time: "4:30 PM" },
+      { id: "flight-3", route: "BCT to ATL", time: "5:15 PM" },
+      { id: "flight-4", route: "BCT to LGA", time: "6:45 PM" },
+      { id: "flight-5", route: "MCO to BCT", time: "7:30 PM" }
     ]
   };
 
@@ -74,6 +78,14 @@ export default function MapView() {
     fetchData()
   }, [])
 
+  // Reset the expanded view when popup is closed
+  const handlePopupClose = () => {
+    setShowAllFlights(false)
+  }
+
+  // Display only the initial flights (limited to 2)
+  const initialFlightsToShow = bocaRatonAirport.flights.slice(0, 2)
+  
   if (loading) return <div>Loading map data...</div>
   if (error) return <div>{error}</div>
 
@@ -94,7 +106,7 @@ export default function MapView() {
           position={[bocaRatonAirport.lat, bocaRatonAirport.lng]} 
           icon={redIcon}
         >
-          <Popup>
+          <Popup onClose={handlePopupClose}>
             <div className="airport-popup">
               <h3>{bocaRatonAirport.description}</h3>
               <p>A public-use airport serving South Florida</p>
@@ -103,7 +115,8 @@ export default function MapView() {
               <div style={{ marginTop: '10px' }}>
                 <h4>Today's Flights:</h4>
                 <ul className="flights-list">
-                  {bocaRatonAirport.flights.map((flight) => (
+                  {/* Show all flights if expanded, otherwise just the initial ones */}
+                  {(showAllFlights ? bocaRatonAirport.flights : initialFlightsToShow).map((flight) => (
                     <li key={flight.id}>
                       <Link 
                         to={`/flights/${flight.id}`} 
@@ -129,6 +142,26 @@ export default function MapView() {
               <div className="coordinates-info">
                 Coordinates: {bocaRatonAirport.lat.toFixed(4)}, {bocaRatonAirport.lng.toFixed(4)}
               </div>
+              
+              {/* Only show the "See More" button if not already showing all flights and there are more flights to show */}
+              {!showAllFlights && bocaRatonAirport.flights.length > initialFlightsToShow.length && (
+                <button 
+                  className="see-more-button" 
+                  onClick={() => setShowAllFlights(true)}
+                >
+                  See All Flights ({bocaRatonAirport.flights.length})
+                </button>
+              )}
+              
+              {/* Show "Show Less" button when expanded */}
+              {showAllFlights && (
+                <button 
+                  className="see-less-button" 
+                  onClick={() => setShowAllFlights(false)}
+                >
+                  Show Less
+                </button>
+              )}
             </div>
           </Popup>
         </Marker>

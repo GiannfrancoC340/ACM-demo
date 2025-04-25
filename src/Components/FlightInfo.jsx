@@ -52,6 +52,78 @@ export default function FlightInfo() {
         city: "Miami",
         state: "Florida"
       }
+    },
+    'flight-3': {
+      route: "BCT to ATL",
+      time: "5:15 PM",
+      airline: "Southern Airways",
+      flightNumber: "SA789",
+      aircraft: "Embraer Phenom 300",
+      status: "On Time",
+      gate: "C1",
+      terminal: "Private Aviation Terminal",
+      duration: "1 hour 55 minutes",
+      distance: "581 miles",
+      departureAirport: {
+        code: "BCT",
+        name: "Boca Raton Airport",
+        city: "Boca Raton",
+        state: "Florida"
+      },
+      arrivalAirport: {
+        code: "ATL",
+        name: "Hartsfield-Jackson Atlanta International Airport",
+        city: "Atlanta",
+        state: "Georgia"
+      }
+    },
+    'flight-4': {
+      route: "BCT to LGA",
+      time: "6:45 PM",
+      airline: "East Coast Express",
+      flightNumber: "ECE456",
+      aircraft: "Bombardier Challenger 350",
+      status: "Delayed (7:15 PM)",
+      gate: "A5",
+      terminal: "Private Aviation Terminal",
+      duration: "2 hours 45 minutes",
+      distance: "1,070 miles",
+      departureAirport: {
+        code: "BCT",
+        name: "Boca Raton Airport",
+        city: "Boca Raton",
+        state: "Florida"
+      },
+      arrivalAirport: {
+        code: "LGA",
+        name: "LaGuardia Airport",
+        city: "New York",
+        state: "New York"
+      }
+    },
+    'flight-5': {
+      route: "MCO to BCT",
+      time: "7:30 PM",
+      airline: "Florida Sky",
+      flightNumber: "FS321",
+      aircraft: "Beechcraft King Air 350",
+      status: "On Time",
+      gate: "D4",
+      terminal: "Main Terminal",
+      duration: "50 minutes",
+      distance: "162 miles",
+      departureAirport: {
+        code: "MCO",
+        name: "Orlando International Airport",
+        city: "Orlando",
+        state: "Florida"
+      },
+      arrivalAirport: {
+        code: "BCT",
+        name: "Boca Raton Airport",
+        city: "Boca Raton",
+        state: "Florida"
+      }
     }
   };
   
@@ -73,7 +145,7 @@ export default function FlightInfo() {
       <div className="flight-header">
         <h1>{flight.route}</h1>
         <div className="flight-time">{flight.time}</div>
-        <div className="flight-status">Status: <span className="status">{flight.status}</span></div>
+        <div className="flight-status">Status: <span className={`status ${flight.status.includes('Delayed') ? 'delayed' : 'on-time'}`}>{flight.status}</span></div>
       </div>
       
       <div className="flight-details">

@@ -72,6 +72,7 @@
   font-family: Arial, sans-serif;
   padding: 5px;
   min-width: 220px;
+  position: relative;
 }
 
 .airport-popup h3 {
@@ -123,4 +124,25 @@
   font-weight: bold;
   font-size: 1.05em;
   letter-spacing: 0.02em;
+}
+
+.see-more-button, .see-less-button {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #444;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.see-more-button:hover, .see-less-button:hover {
+  background-color: #e04141;
+  color: white;
+  border-color: #e04141;
 }
