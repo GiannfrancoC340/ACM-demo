@@ -36,7 +36,6 @@ function Home() {
       <div style={{ marginTop: '20px' }}>
         <a href="/login" style={{ marginRight: '10px' }}>Login</a>
         <a href="/signup" style={{ marginRight: '10px' }}>Signup</a>
-        <a href="/map">View Map</a>
       </div>
     </div>
   );
